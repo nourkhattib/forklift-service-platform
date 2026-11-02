@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.1",
+  "source": "forklift_fixed.sql",
+  "database_notes": {
+    "one_truth_principle": "טבלת service_requests היא המקור היחיד לכל קריאות השירות והבקשות (מוצרים ושירות). אין להשתמש בטבלאות טיקטים ישנות.",
+    "score_note_he": "אין עמודת score קבועה לטכנאים. ניקוד טכנאי מחושב כנגזרת: מספר קריאות עם status='completed'."
+  },
+
+  "tables": {
+    "users": {
+      "description_he": "לקוחות המערכת",
+      "primary_key": "id"
+    },
+
+    "staff": {
+      "description_he": "עובדים: מנהלים וטכנאים",
+      "primary_key": "id",
+      "columns": {
+        "role": {
+          "type": "enum",
+          "values": ["admin", "technician"],
+          "description_he": "תפקיד העובד"
+        }
+      }
+    },
+
+    "products": {
+      "description_he": "קטלוג מוצרים: מלגזות, חלקים ואביזרים",
+      "primary_key": "id",
+      "columns": {
+        "active": {
+          "type": "boolean",
+          "description_he": "האם המוצר פעיל וזמין"
+        }
+      }
+    },
+
+    "inventory": {
+      "description_he": "ציוד בבעלות לקוחות",
+      "primary_key": "id",
+      "columns": {
+        "user_id": {
+          "description_he": "בעל הציוד (לקוח)"
+        },
+        "product_id": {
+          "description_he": "המוצר שנרכש"
+        }
+      }
+    },
+
+    "service_requests": {
+      "description_he": "טבלת ליבה לכל קריאות השירות ובקשות המוצר",
+      "primary_key": "id",
+      "columns": {
+        "user_id": {
+          "description_he": "הלקוח שפתח את הבקשה"
+        },
+        "technician_id": {
+          "description_he": "טכנאי משויך (אם קיים)"
+        },
+        "product_id": {
+          "description_he": "מוצר קשור (לבקשות מוצר או שירות ספציפי)"
+        },
+        "request_type": {
+          "type": "enum",
+          "values": ["service", "product"],
+          "description_he": "סוג הבקשה"
+        },
+        "status": {
+          "type": "enum",
+          "values": [
+            "new",
+            "open",
+            "pending",
+            "in_progress",
+            "completed",
+            "closed",
+            "cancelled"
+            
+          ],
+          "description_he": "סטטוס הבקשה"
+        },
+        "technician_notes": {
+          "description_he": "הערות טכנאי והיסטוריית טיפול"
+        }
+      }
+    },
+
+    "quotes": {
+      "description_he": "הצעות מחיר ותשלומים עבור בקשות",
+      "primary_key": "id",
+      "columns": {
+        "user_id": {
+          "description_he": "הלקוח שמשלם"
+        },
+        "service_id": {
+          "description_he": "קישור לבקשת שירות (service_requests.id)"
+        },
+        "product_request_id": {
+          "description_he": "קישור לבקשת מוצר (service_requests.id)"
+        },
+        "status": {
+          "type": "enum",
+          "values": ["pending", "paid", "cancelled"],
+          "description_he": "סטטוס הצעת המחיר"
+        }
+      }
+    },
+
+    "technician_off_days": {
+      "description_he": "ימי חופש של טכנאים",
+      "primary_key": "id",
+      "columns": {
+        "technician_id": {
+          "description_he": "טכנאי (staff.id)"
+        },
+        "off_date": {
+          "type": "date",
+          "description_he": "תאריך חופש"
+        }
+      }
+    }
+  },
+
+  "inferred_relationships": [
+    {
+      "from": "inventory.user_id",
+      "to": "users.id"
+    },
+    {
+      "from": "inventory.product_id",
+      "to": "products.id"
+    },
+    {
+      "from": "service_requests.user_id",
+      "to": "users.id"
+    },
+    {
+      "from": "service_requests.technician_id",
+      "to": "staff.id"
+    },
+    {
+      "from": "service_requests.product_id",
+      "to": "products.id"
+    },
+    {
+      "from": "quotes.user_id",
+      "to": "users.id"
+    },
+    {
+      "from": "quotes.service_id",
+      "to": "service_requests.id"
+    },
+    {
+      "from": "quotes.product_request_id",
+      "to": "service_requests.id"
+    },
+    {
+      "from": "technician_off_days.technician_id",
+      "to": "staff.id"
+    }
+  ],
+
+  "derived_logic_notes": {
+    "technician_score": "ניקוד טכנאי = COUNT(service_requests WHERE technician_id = staff.id AND status='completed')",
+    "active_workload": "עומס טכנאי = COUNT(service_requests WHERE status IN ('open','in_progress','pending'))",
+    "availability": "טכנאי אינו זמין אם קיים technician_off_days.off_date = היום"
+  }
+}

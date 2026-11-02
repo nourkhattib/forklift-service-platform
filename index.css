@@ -1,0 +1,154 @@
+/* Navbar */
+    .navbar {
+        background-color: #1f1f1f !important;
+      }
+      .navbar-brand img {
+        height: 45px;
+      }
+      .nav-link {
+        color: white !important;
+        /* pointer-events: none; 🔒 Locked links */
+        /* opacity: 0.6; */
+      }
+  
+      /* Hero Section */
+      .hero {
+        background: url('imgs/back.png') center/cover no-repeat;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-align: center;
+        position: relative;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.6);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+  
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+  
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      .btn-orange {
+        background-color: #a86205;
+        color: white;
+        border: none;
+        font-size: 1.1rem;
+        padding: 10px 30px;
+      }
+      .btn-orange:hover {
+        background-color: #343a40;
+      }
+
+      /* Center carousel dots below cards */
+#servicesCarousel .carousel-indicators {
+    position: static;
+    margin-top: 15px;
+  }
+  #servicesCarousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+  }
+  
+  
+      /* === Unified Service Card Design === */
+.service-card, .carousel-item .card {
+    border: none;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    width: 18rem;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: white; /* unified brown-orange */
+  }
+  .service-card:hover, .carousel-item .card:hover {
+    background-color: #acb6c0;
+    transform: translateY(-5px);
+  }
+  .service-card img, .carousel-item .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  /* === Section Titles with Glowing Text Shadow === */
+  h2, h3 {
+    color: rgba(255, 136, 0, 0.8);
+  }
+  
+  .card-title {
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+  }
+  /* === Center Modal Titles & Add Intro Text === */
+  .modal-header {
+    justify-content: center; /* Centers title */
+    border-bottom: none; /* cleaner look */
+  }
+  .modal-header h5 {
+    font-weight: bold;
+    color: #ff6600;
+    text-align: center;
+    width: 100%;
+  }
+  .modal-body .welcome-line {
+    text-align: center;
+    font-style: italic;
+    color: #ff6600;
+    margin-bottom: 15px;
+    font-size: 15px;
+  }
+  
+  /* Orange-bordered inputs (restored) */
+  .modal-body input {
+    border: 2px solid #ff6600 !important;
+    border-radius: 8px;
+  }
+  .modal-body input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255,102,0,0.6);
+  }
+  
+  /* Switch links */
+  .switch-text {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+  }
+  .switch-text a {
+    color: #ff6600;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  .switch-text a:hover {
+    text-decoration: none;
+  }
+  
+      /* Footer */
+      footer {
+        background-color: #1f1f1f;
+        color: #bbb;
+        padding: 20px 0;
+      }

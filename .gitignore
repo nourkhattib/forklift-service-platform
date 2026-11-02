@@ -1,0 +1,19 @@
+# Secrets - never commit
+config/config.php
+ai-server/.env
+.env
+
+# Dependencies
+vendor/
+ai-server/__pycache__/
+ai-server/venv/
+ai-server/.venv/
+*.pyc
+
+# Logs / OS / IDE
+logs/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
