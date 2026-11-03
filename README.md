@@ -3,7 +3,13 @@
 Full-stack web platform for a forklift sales & service company — product catalog, customer portal, technician workspace, back office and an AI support chatbot.
 Final project, B.A. Information Systems, University of Haifa.
 
-> Screenshots: add images to a `docs/` folder and link them here.
+## Screenshots
+
+| Desktop | Mobile |
+|---|---|
+| **About**<br><img src="docs/screenshots/about-desktop.png" width="560"> | <img src="docs/screenshots/about-mobile.png" width="200"> |
+| **Services**<br><img src="docs/screenshots/services-desktop.png" width="560"> | <img src="docs/screenshots/services-mobile.png" width="200"> |
+| **Troubleshooting guide**<br><img src="docs/screenshots/troubleshooting-desktop.png" width="560"> | <img src="docs/screenshots/troubleshooting-mobile.png" width="200"> |
 
 ## Features
 - **Public site** – catalogs for forklifts, spare parts, hoses, pallets and accessories; product details; services, troubleshooting guide, contact form.
